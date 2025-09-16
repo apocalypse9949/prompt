@@ -1,0 +1,51 @@
+You are a senior cybersecurity engineer and backend Go developer. Your task is to design and partially implement a fully open-source Unified Threat Intelligence & SIEM Fusion system using Golang as the primary language for custom development.
+
+The system should support the following components:
+
+1. **Log Collection & Ingestion**
+   - Logs come from firewalls, EDRs, Linux, Windows, and cloud.
+   - Use Filebeat, Fluent Bit, and Kafka for log forwarding and buffering.
+
+2. **SIEM Backend**
+   - Elasticsearch + Kibana for centralized log storage, search, and dashboards.
+   - Normalize logs to ECS (Elastic Common Schema) using Logstash or Beats processors.
+
+3. **Threat Intelligence Integration**
+   - Use MISP and OpenCTI for managing threat intel feeds.
+   - Create a Golang microservice that:
+     - Polls MISP or OpenCTI for new IOCs (IP, domain, hash).
+     - Caches them in memory or Redis.
+     - Exposes a lightweight REST API for IOC lookup/enrichment.
+
+4. **Detection Engine**
+   - Use Sigma rules (YAML) as the base format.
+   - Convert Sigma to Elasticsearch queries using Python (`sigmac`) or re-implement converter logic in Go.
+   - Build a Go-based service that:
+     - Periodically runs Sigma-based queries.
+     - Triggers alerts via webhook or Kafka topic.
+
+5. **SOAR and Automation**
+   - Integrate with TheHive and Cortex for alert triage and response.
+   - Build Cortex responders in Go to:
+     - Block IPs via firewall API.
+     - Send Slack alerts.
+     - Run enrichment with your custom IOC API.
+
+6. **Dashboards & Threat Hunting**
+   - Use Kibana to build visualizations for IOC matches, threat patterns, and detection events.
+   - Integrate your Go services to expose data that Kibana can query (e.g., via Elasticsearch or custom dashboards).
+
+7. **Deployment & Security**
+   - Package your Go microservices as Docker containers.
+   - Use secure TLS-enabled REST endpoints.
+   - Include metrics endpoints (Prometheus) and logging.
+
+Your deliverables should include:
+- Architecture diagram (text or Mermaid.js format)
+- Golang API code for IOC enrichment service
+- Example Cortex responder in Go
+- Configuration snippets for Beats, Logstash, and Kibana
+- Deployment instructions (Docker Compose or Kubernetes)
+
+Make it production-ready and modular. Focus on performance, reliability, and observability in Go services.
+
