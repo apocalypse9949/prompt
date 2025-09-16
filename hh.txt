@@ -49,3 +49,5 @@ Your deliverables should include:
 
 Make it production-ready and modular. Focus on performance, reliability, and observability in Go services.
 
+Write a Dockerfile and healthcheck for your Golang service?
+
